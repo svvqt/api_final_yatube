@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from rest_framework.relations import SlugRelatedField
 from rest_framework.validators import UniqueTogetherValidator
 
 from .models import Follow, Group, Post, Comment, User
@@ -47,12 +46,12 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         fields = "__all__"
         model = Comment
-    
+
     def create(self, validated_data):
         post = validated_data.get('post')
         author = validated_data.get('author')
         text = validated_data.get('text')
-        
+
         # Создаем новый комментарий
         return Comment.objects.create(post=post, author=author, text=text)
 
